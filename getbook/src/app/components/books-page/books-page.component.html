@@ -1,0 +1,46 @@
+<a [routerLink]="['/books/form/']" class="btn btn-success">Add New Book</a>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr class="success">
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>ISBN</th>
+                <th>LANGUAGE</th>
+                <th>CATEGORY</th>
+                <th>AUTHORS</th>
+                <th>MANAGE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!page || !page.content">
+                <td colspan="8" class="text-center">Loading data. Please wait...</td>
+            </tr>
+            <tr *ngIf="page && page.content && !page.content.length">
+                <td colspan="8" class="text-center">No Data</td>
+            </tr>
+            <ng-container *ngIf="page && page.content && page.content.length">
+                <tr *ngFor="let book of page.content">
+                    <td>{{book.id}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.isbn}}</td>
+                    <td>{{book.language}}</td>
+                    <td>{{book.category.name}}</td>
+                    <td>
+                        <div *ngFor="let author of book.authors">{{author.name}}</div>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" [routerLink]="['/books/form/', book.id]">Edit</a>
+                        <button class="btn btn-danger" (click)="deleteBookById(book.id)">Delete</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<br><br>
+<div *ngIf="page && params">
+    <app-pagination [pageUrl]="'/books'" [page]="page" [params]="params"></app-pagination>
+</div>

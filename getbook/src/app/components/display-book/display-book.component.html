@@ -1,0 +1,13 @@
+<div>
+
+	<div>
+		<div><img [src]="'data:image/JPEG;base64,' + book.image" width="200" height="300" /></div>
+		<div>
+			<h3>{{book.title}}</h3>
+			<div><span *ngFor="let author of book.authors">{{author.name}},&nbsp;</span></div>
+		</div>
+	</div>
+
+	<br>
+	<button class="btn btn-primary" (click)="downloadBook()">Download</button>
+</div>

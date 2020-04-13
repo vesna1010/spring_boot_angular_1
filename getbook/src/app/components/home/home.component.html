@@ -1,0 +1,56 @@
+<div *ngIf="!page">Loading data. Please wait...</div>
+
+<div *ngIf="page">
+
+	<div class="row">
+		<div class="col-sm-9">
+
+			<div class="row">
+
+				<div class="col-sm-12">
+					<form class="form-inline">
+						<div class="form-group">
+							<input type="text" id="title" name="title" [(ngModel)]="title" placeholder="Title"
+								class="form-control" />
+						</div>
+						<div class="form-group">
+							<select id="language" name="language" [(ngModel)]="language" class="form-control">
+								<option [value]="undefined">Select Language</option>
+								<option *ngFor="let language of Object.keys(Language)" [value]="language">{{language}}
+								</option>
+							</select>
+						</div>
+						<button type="button" class="btn btn-primary" [routerLink]="['/']"
+							[queryParams]="{ title : title, language : Language[language] || ''}">Search</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div *ngFor="let book of page.content">
+						<app-display-book [book]="book"></app-display-book>
+						<br>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<br><br>
+					<div *ngIf="page && params">
+						<app-pagination [pageUrl]="'/'" [page]="page" [params]="params"></app-pagination>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-sm-3" *ngIf="categories">
+			<div *ngFor="let category of categories" [class.bg-primary]="categoryId === category.id">
+				<a [routerLink]="['/']" [queryParams]="{ categoryId : category.id }">{{category.name}}</a>
+			</div>
+		</div>
+
+	</div>
+</div>

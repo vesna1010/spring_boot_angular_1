@@ -1,0 +1,89 @@
+<div *ngIf="!authors || !categories">Loading data. Please wait...</div>
+
+<div *ngIf="authors && categories">
+    <form #bookForm="ngForm" (submit)="onSubmit()">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Book Form</h3>
+            </div>
+
+            <div class="panel-body">
+                <input id="id" name="id" type="hidden" #id="ngModel" [(ngModel)]="book.id" />
+
+                <div class="form-group">
+                    <label for="title">TITLE</label>
+                    <input id="title" name="title" #title="ngModel" [(ngModel)]="book.title" type="text"
+                        class="form-control" required pattern="^[a-zA-Z0-9\s]{3,}$" />
+                    <div *ngIf="title.touched && title.invalid" class="text-danger">
+                        <span *ngIf="title.hasError('required')">Title is required</span>
+                        <span *ngIf="title.hasError('pattern')">Title is invalid</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="isbn">ISBN</label>
+                    <input id="isbn" name="isbn" #isbn="ngModel" [(ngModel)]="book.isbn" type="text"
+                        class="form-control" required pattern="^[0-9\-]{13,}$" />
+                    <div *ngIf="isbn.touched && isbn.invalid" class="text-danger">
+                        <span *ngIf="isbn.hasError('required')">Isbn is required</span>
+                        <span *ngIf="isbn.hasError('pattern')">Isbn is invalid</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="language">LANGUAGE</label>
+                    <select id="language" name="language" #language="ngModel" [(ngModel)]="book.language"
+                        class="form-control" required>
+                        <option *ngFor="let language of Object.keys(Language)" [value]="language">{{language}}</option>
+                    </select>
+                    <div *ngIf="language.touched && language.invalid" class="text-danger">
+                        <span *ngIf="language.hasError('required')">Language is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">CATEGORY</label>
+                    <select id="category" name="category" #bookCategory="ngModel" [(ngModel)]="book.category"
+                        class="form-control" required [compareWith]="isEqualCategories">
+                        <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+                    </select>
+                    <div *ngIf="bookCategory.touched && bookCategory.invalid" class="text-danger">
+                        <span *ngIf="bookCategory.hasError('required')">Category is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="authors">AUTHORS</label>
+                    <select id="authors" name="authors" #bookAuthors="ngModel" [(ngModel)]="book.authors"
+                        class="form-control" [multiple]="true" required [compareWith]="isEqualAuthors">
+                        <option *ngFor="let author of authors" [ngValue]="author">{{author.name}}</option>
+                    </select>
+                    <div *ngIf="bookAuthors.touched && bookAuthors.invalid" class="text-danger">
+                        <span *ngIf="bookAuthors.hasError('required')">Authors is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="file">FILE</label>
+                    <input id="file" name="file" type="file" #file accept="application/pdf"
+                        (change)="setBookContent(file.files[0])" required />
+                    <div *ngIf="file.touched && file.invalid" class="text-danger">
+                        <span *ngIf="file.hasError('required')">Pdf file is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">DESCRIPTION</label>
+                    <textarea id="description" name="description" #description="ngModel" [(ngModel)]="book.description"
+                        class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary"
+                    [disabled]="bookForm.invalid || !book.content">{{book.id ? 'Update' : 'Save'}}</button>
+            </div>
+
+        </div>
+    </form>
+</div>

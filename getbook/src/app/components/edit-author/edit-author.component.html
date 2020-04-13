@@ -1,0 +1,5 @@
+<div *ngIf="!author">Loading data. Please wait...</div>
+
+<div *ngIf="author">
+	<app-author-form [author]="author" (save)="updateAuthor()"></app-author-form>
+</div>

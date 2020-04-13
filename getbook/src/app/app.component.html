@@ -1,0 +1,25 @@
+<nav class="navbar navbar-inverse">
+
+  <a class="navbar-brand" routerLink=""><span class="text-primary">GET</span><span class="text-success">BOOK</span></a>
+
+  <ul class="nav navbar-nav">
+    
+    <li routerLinkActive="active">
+      <a routerLink="/categories">Categories</a>
+    </li>
+
+    <li routerLinkActive="active">
+      <a routerLink="/authors">Authors</a>
+    </li>
+
+    <li routerLinkActive="active">
+      <a routerLink="/books">Books</a>
+    </li>
+
+  </ul>
+
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

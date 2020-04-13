@@ -1,0 +1,15 @@
+<nav>
+    <ul class="pagination">
+        <li class="page-item" [ngClass]="{'disabled' : page.number === 0}">
+            <a class="page-link" (click)="navigateToPageNumber(page.number - 1)">Previous</a>
+        </li>
+
+        <li class="page-item" *ngFor="let number of numbers" [ngClass]="{'active' : page.number === number}">
+            <a class="page-link" (click)="navigateToPageNumber(number)">{{number + 1}}</a>
+        </li>
+
+        <li class="page-item" [ngClass]="{'disabled' : page.number === page.totalPages - 1}">
+            <a class="page-link" (click)="navigateToPageNumber(page.number + 1)">Next</a>
+        </li>
+    </ul>
+</nav>

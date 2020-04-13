@@ -1,0 +1,38 @@
+<a [routerLink]="['/categories/form/']" class="btn btn-success">Add New Category</a>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr class="success">
+                <th>ID</th>
+                <th>NAME</th>
+                <th>DESCRIPTION</th>
+                <th>MANAGE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!page || !page.content">
+                <td colspan="4" class="text-center">Loading data. Please wait...</td>
+            </tr>
+            <tr *ngIf="page && page.content && !page.content.length">
+                <td colspan="4" class="text-center">No Data</td>
+            </tr>
+            <ng-container *ngIf="page && page.content && page.content.length">
+                <tr *ngFor="let category of page.content">
+                    <td>{{category.id}}</td>
+                    <td>{{category.name}}</td>
+                    <td>{{category.description}}</td>
+                    <td>
+                        <a class="btn btn-primary" [routerLink]="['/categories/form/', category.id]">Edit</a>
+                        <button class="btn btn-danger" (click)="deleteCategoryById(category.id)">Delete</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<br><br>
+<div *ngIf="page && params">
+    <app-pagination [pageUrl]="'/categories'" [page]="page" [params]="params"></app-pagination>
+</div>

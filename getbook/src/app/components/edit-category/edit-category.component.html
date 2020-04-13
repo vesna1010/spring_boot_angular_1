@@ -1,0 +1,5 @@
+<div *ngIf="!category">Loading data. Please wait...</div>
+
+<div *ngIf="category">
+	<app-category-form [category]="category" (save)="updateCategory()"></app-category-form>
+</div>

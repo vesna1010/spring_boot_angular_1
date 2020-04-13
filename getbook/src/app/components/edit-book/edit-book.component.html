@@ -1,0 +1,5 @@
+<div *ngIf="!book">Loading data. Please wait...</div>
+
+<div *ngIf="book">
+	<app-book-form [book]="book" (save)="updateBook()"></app-book-form>
+</div>
