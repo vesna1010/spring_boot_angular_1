@@ -9,7 +9,7 @@ import { IPageable } from '../models/i-pageable';
   providedIn: 'root'
 })
 export class AuthorService {
-  static URL = 'http://localhost:8080/bookservice/authors';
+  static readonly URL = 'http://localhost:8080/bookservice/authors';
 
   constructor(private http: HttpClient) { }
 
