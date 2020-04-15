@@ -9,7 +9,7 @@ import { Language } from '../enums/language.enum';
   providedIn: 'root'
 })
 export class BookService {
-  static URL = 'http://localhost:8080/bookservice/books';
+  static readonly URL = 'http://localhost:8080/bookservice/books';
 
   constructor(private http: HttpClient) { }
 
