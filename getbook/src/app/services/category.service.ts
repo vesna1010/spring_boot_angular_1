@@ -9,7 +9,7 @@ import { IPage } from '../models/i-page';
   providedIn: 'root'
 })
 export class CategoryService {
-  static URL = 'http://localhost:8080/bookservice/categories';
+  static readonly URL = 'http://localhost:8080/bookservice/categories';
 
   constructor(private http: HttpClient) { }
 
