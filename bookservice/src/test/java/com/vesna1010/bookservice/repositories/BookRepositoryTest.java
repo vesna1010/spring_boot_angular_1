@@ -122,10 +122,12 @@ public class BookRepositoryTest extends BaseRepositoryTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				inputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(inputStream != null) {
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
